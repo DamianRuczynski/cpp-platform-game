@@ -15,7 +15,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(sfml)
-add_executable(platformGame main.cpp)
+add_executable(platformGame main.cpp
+        headers/config.hpp
+)
 target_link_libraries(
         platformGame
         fmt
@@ -29,3 +31,4 @@ IF (WIN32)
             COMMAND_EXPAND_LISTS
     )
 ENDIF ()
+
