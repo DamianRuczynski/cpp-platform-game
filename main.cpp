@@ -3,10 +3,29 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include "headers/config.hpp"
+#include "headers/MapGenerator.h"
 
 
 int main() {
     //starting configuration
+    std::vector<std::string> levelConfig = {
+            "                                                                   ",
+            "                                                                   ",
+            "                                                                   ",
+            "                                                                   ",
+            "                                                                   ",
+            "            %  =*=     %                                           ",
+            "                                                                   ",
+            "                                           -+                      ",
+            "                              ^     ^      ()                      ",
+            "=============================================   ===================",
+    };
+
+    int level = 2;
+
+    MapGenerator mapGenerator(levelConfig, level);
+    mapGenerator.generateMap();
+
     char current_level = 0;
     short level_finish = 0;
     std::chrono::microseconds lag(0);
@@ -23,9 +42,9 @@ int main() {
 
     //icon load
     auto image = sf::Image{};
-    if (!image.loadFromFile(iconRef)){
+    if (!image.loadFromFile(iconRef)) {
         fmt::println("Cannot load icon");
-    }else {
+    } else {
         window.setIcon(image.getSize().x, image.getSize().y, image.getPixelsPtr());
     }
 

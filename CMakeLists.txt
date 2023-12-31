@@ -17,20 +17,7 @@ FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(sfml)
 add_executable(platformGame main.cpp
         headers/config.hpp
-        headers/Animation.hpp
-        src/Animation.cpp
-        headers/ConvertSketch.hpp
-        src/enemies/Enemy.cpp
-        headers/Enemy.h
-        src/Mario.cpp
-        headers/Mario.h
-        src/DrawMap.cpp
-        headers/DrawMap.h
-        src/Map.cpp
-        headers/Map.h
-        src/enemies/first_level_enemy.cpp
-        headers/enemies/first_level_enemy.h
-        src/MapGenerator.cpp
+        MapGenerator.cpp
         headers/MapGenerator.h
 )
 target_link_libraries(
