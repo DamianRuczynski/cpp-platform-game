@@ -17,8 +17,14 @@ FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(sfml)
 add_executable(platformGame main.cpp
         headers/config.hpp
-        MapGenerator.cpp
-        headers/MapGenerator.h
+        src/MapGenerator.cpp
+        headers/MapGenerator.hpp
+        src/ConvertBackground.cpp
+        headers/ConvertBackground.hpp
+        src/enemies/Enemy.cpp
+        headers/enemies/Enemy.hpp
+        src/Protagonist.cpp
+        headers/Protagonist.hpp
 )
 target_link_libraries(
         platformGame
