@@ -16,15 +16,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(sfml)
 add_executable(platformGame main.cpp
-        headers/config.hpp
+        headers/helpers/config.hpp
         src/MapGenerator.cpp
         headers/MapGenerator.hpp
-        src/ConvertBackground.cpp
-        headers/ConvertBackground.hpp
+        src/helpers/ConvertBackground.cpp
+        headers/helpers/ConvertBackground.hpp
         src/enemies/Enemy.cpp
         headers/enemies/Enemy.hpp
         src/Protagonist.cpp
         headers/Protagonist.hpp
+        src/helpers/Button.cpp
+        headers/helpers/Button.hpp
 )
 target_link_libraries(
         platformGame

@@ -3,8 +3,10 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "headers/config.hpp"
+#include "headers/helpers/config.hpp"
 #include "headers/MapGenerator.hpp"
+#include "headers/helpers/Button.hpp"
+#include "headers/Protagonist.hpp"
 
 
 struct GameData {
@@ -14,35 +16,23 @@ struct GameData {
 
 // Function to display the welcome page with buttons
 void displayWelcomePage(sf::RenderWindow &window) {
-    sf::Font font;
+    Button start_button(50.f, 375.f, 200.f, 50.f, "Start Game");
+    Button change_avatar_button(280.f, 375.f, 200.f, 50.f, "Change Avatar");
 
-    sf::Text welcomeText("Welcome to the Game!", font, 30);
-    welcomeText.setPosition(50.f, 50.f);
-    welcomeText.setFillColor(sf::Color::Black);
 
-    sf::Text startText("1. Start Game", font, 2000);
-    startText.setPosition(50.f, 150.f);
-    startText.setFillColor(sf::Color::Black);
+    start_button.draw(window);
+    change_avatar_button.draw(window);
 
-    sf::Text avatarText("2. Change Avatar", font, 20);
-    avatarText.setPosition(50.f, 200.f);
-    avatarText.setFillColor(sf::Color::Black);
+    if (start_button.isClicked(window)) {
+//        MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
+//        mapGenerator.generateMap();
+        std::cout << "Starting Game with Level " << 2 << "...\n";
+    }
 
-    window.draw(welcomeText);
-    window.draw(startText);
-    window.draw(avatarText);
-}
-
-// Function to start the game with given level and level config
-void startGame(sf::RenderWindow &window, const GameData &gameData) {
-    MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
-    mapGenerator.generateMap();
-    std::cout << "Starting Game with Level " << gameData.level << "...\n";
-}
-
-// Function to change the avatar
-void changeAvatar() {
-    std::cout << "Avatar changed!\n";
+    if (change_avatar_button.isClicked(window)) {
+//        catchy.changeAvatar();
+        std::cout << "Avatar changed!\n";
+    }
 }
 
 
@@ -62,6 +52,8 @@ int main() {
             "                              ^     ^      ()                      ",
             "=============================================   ===================",
     };
+
+    Protagonist catchy;
 
 
     char current_level = 0;
@@ -113,27 +105,6 @@ int main() {
                         switch (event.key.code) {
                             case sf::Keyboard::Enter:
                                 fmt::println("Enter pressed");
-                                break;
-                        }
-                        break;
-                    case sf::Event::MouseButtonPressed:
-                        switch (event.mouseButton.button) {
-                            case sf::Mouse::Left:
-                                // Check if the mouse click is within the area of the buttons
-                                if (sf::Mouse::getPosition(window).x >= 50.f &&
-                                    sf::Mouse::getPosition(window).x <= 200.f &&
-                                    sf::Mouse::getPosition(window).y >= 150.f &&
-                                    sf::Mouse::getPosition(window).y <= 180.f) {
-                                    startGame(window, gameData);
-                                } else if (sf::Mouse::getPosition(window).x >= 50.f &&
-                                           sf::Mouse::getPosition(window).x <= 200.f &&
-                                           sf::Mouse::getPosition(window).y >= 200.f &&
-                                           sf::Mouse::getPosition(window).y <= 230.f) {
-                                    changeAvatar();
-                                }
-                                break;
-                            case sf::Mouse::Right:
-                                fmt::println("Right mouse button pressed");
                                 break;
                         }
                         break;
