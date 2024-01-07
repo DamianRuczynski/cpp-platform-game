@@ -18,6 +18,8 @@ public:
 
     void generateMap();
 
+    void update_map_sketch(const unsigned char i);
+
 private:
 
     void generateBlock(const sf::Vector2f &position, const std::string &textureFile);

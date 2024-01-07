@@ -35,6 +35,8 @@ void displayWelcomePage(sf::RenderWindow &window) {
 
 // Function to start the game with given level and level config
 void startGame(sf::RenderWindow &window, const GameData &gameData) {
+    MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
+    mapGenerator.generateMap();
     std::cout << "Starting Game with Level " << gameData.level << "...\n";
 }
 
@@ -61,18 +63,24 @@ int main() {
             "=============================================   ===================",
     };
 
-    MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
-    mapGenerator.generateMap();
 
     char current_level = 0;
     short level_finish = 0;
     std::chrono::microseconds lag(0);
     std::chrono::steady_clock::time_point previous_time;
+
+
     //SFML window menu configuration
     sf::Color background_color = sf::Color(225, 112, 85);
     sf::Event event;
     sf::RenderWindow window(sf::VideoMode(SCREEN_RESIZE * SCREEN_WIDTH, SCREEN_RESIZE * SCREEN_HEIGHT),
                             "Catch Catchy", sf::Style::Close);
+    sf::Texture background;
+    if (!background.loadFromFile(
+            "C:\\Users\\damia\\Desktop\\MAIN\\PJATK\\thirdSemester\\PJC\\platformGame\\assets\\welcome_short.jpg")) {
+        fmt::print("Cannot load background");
+    }
+    sf::Sprite backgroundImage(background);
     window.setPosition({static_cast<int>(window.getPosition().x), static_cast<int>(window.getPosition().y - 90)});
 
     sf::View view(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -88,7 +96,6 @@ int main() {
     constexpr std::chrono::microseconds FRAME_DURATION(16667);
     // open window
     while (window.isOpen()) {
-
 
         auto delta_time = std::chrono::duration_cast<std::chrono::microseconds>(
                 std::chrono::steady_clock::now() - previous_time);
@@ -112,7 +119,6 @@ int main() {
                     case sf::Event::MouseButtonPressed:
                         switch (event.mouseButton.button) {
                             case sf::Mouse::Left:
-                                fmt::println("Left mouse button pressed");
                                 // Check if the mouse click is within the area of the buttons
                                 if (sf::Mouse::getPosition(window).x >= 50.f &&
                                     sf::Mouse::getPosition(window).x <= 200.f &&
@@ -138,6 +144,7 @@ int main() {
                 view.reset(sf::FloatRect(view_x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
                 window.setView(view);
                 window.clear(background_color);
+                window.draw(backgroundImage);
                 displayWelcomePage(window);
                 window.display();
             }

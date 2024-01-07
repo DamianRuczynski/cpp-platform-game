@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-#include "headers/MapGenerator.h"
+#include "../headers/MapGenerator.hpp"
 
 
 MapGenerator::MapGenerator(const std::vector<std::string> &levelConfig, int level)
@@ -48,3 +48,8 @@ void MapGenerator::generateEnemy(const sf::Vector2f &position, const std::string
     // Use SFML to create and draw an enemy sprite
 }
 
+void MapGenerator::update_map_sketch(const unsigned char i) {
+
+    std::cout << "Updating map sketch" << std::endl;
+
+}
