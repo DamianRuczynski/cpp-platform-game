@@ -15,7 +15,7 @@ struct GameData {
 };
 
 // Function to display the welcome page with buttons
-void displayWelcomePage(sf::RenderWindow &window) {
+void displayWelcomePage(sf::RenderWindow &window, Protagonist &catchy, GameData &gameData) {
     Button start_button(50.f, 375.f, 200.f, 50.f, "Start Game");
     Button change_avatar_button(280.f, 375.f, 200.f, 50.f, "Change Avatar");
 
@@ -24,13 +24,14 @@ void displayWelcomePage(sf::RenderWindow &window) {
     change_avatar_button.draw(window);
 
     if (start_button.isClicked(window)) {
-//        MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
-//        mapGenerator.generateMap();
+        MapGenerator mapGenerator(gameData.levelConfig, gameData.level);
+        mapGenerator.generateMap(window);
+
         std::cout << "Starting Game with Level " << 2 << "...\n";
     }
 
     if (change_avatar_button.isClicked(window)) {
-//        catchy.changeAvatar();
+        catchy.changeAvatar();
         std::cout << "Avatar changed!\n";
     }
 }
@@ -55,9 +56,6 @@ int main() {
 
     Protagonist catchy;
 
-
-    char current_level = 0;
-    short level_finish = 0;
     std::chrono::microseconds lag(0);
     std::chrono::steady_clock::time_point previous_time;
 
@@ -116,7 +114,10 @@ int main() {
                 window.setView(view);
                 window.clear(background_color);
                 window.draw(backgroundImage);
-                displayWelcomePage(window);
+                displayWelcomePage(window, catchy, gameData);
+                std::cout << "Drawing welcome page" << std::endl;
+
+
                 window.display();
             }
         }

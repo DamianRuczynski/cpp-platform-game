@@ -13,10 +13,12 @@ class MapGenerator {
     int level;
     const int blockSize = 32; // Adjust the block size as needed
 
+    sf::RenderWindow gameWindow;
+
 public:
     MapGenerator(const std::vector<std::string> &levelConfig, int level);
 
-    void generateMap();
+    void generateMap(sf::RenderWindow &window);
 
     void update_map_sketch(const unsigned char i);
 

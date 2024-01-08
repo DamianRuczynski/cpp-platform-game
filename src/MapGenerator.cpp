@@ -10,7 +10,11 @@
 MapGenerator::MapGenerator(const std::vector<std::string> &levelConfig, int level)
         : levelConfig(levelConfig), level(level) {}
 
-void MapGenerator::generateMap() {
+void MapGenerator::generateMap(sf::RenderWindow &window) {
+
+    gameWindow.create(sf::VideoMode(512, 512), "Game Window, Level: " + level, sf::Style::Close);
+    gameWindow.setPosition({static_cast<int>(window.getPosition().x), static_cast<int>(window.getPosition().y)});
+//    window.close();
 
     std::cout << "MapGenerator::generateMap() called" << std::endl;
 //        // Load background based on the level
